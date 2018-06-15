@@ -1,0 +1,13 @@
+{
+  "name": "streams_via_webworkers",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Globolobo/streams_via_webworkers.git",
+  "author": "globolobo <sean.pichardo@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  }
+}
