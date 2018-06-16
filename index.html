@@ -11,11 +11,33 @@
 </head>
 
 <body>
-  <div id="output"></div>
+  <div id="app"></div>
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
   <script type="text/babel">
-    const getMessage = () => "Hello World";
-    document.getElementById('output').innerHTML = getMessage();
+    const request = new XMLHttpRequest();
+
+// request.addEventListener("progress", updateProgress);
+// request.addEventListener("load", transferComplete);
+// request.addEventListener("error", transferFailed);
+// request.addEventListener("abort", transferCanceled);
+const query = 'world of warcraft';
+request.open("GET", `https://api.twitch.tv/kraken/search/streams?q=${query}`);
+request.setRequestHeader('Client-ID', '5bekzo1mw7dssm63lojrxkpi251ggw'); //TODO remove client ID
+
+const promisedRes = new Promise((resolve)=>{
+  request.onloadend = (pe) => {
+    resolve(JSON.parse(request.response));
+  }
+})
+request.send();
+//resolvedPromise = await resJson;
+//console.log('response is ',  resolvedPromise)
+async function getRequest (){
+  const resJson = await promisedRes;
+  console.log('resJson is', resJson)
+  document.getElementById('app').innerHTML = JSON.stringify(resJson);
+}
+getRequest();
     </script>
 </body>
 </html>
