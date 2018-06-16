@@ -11,33 +11,79 @@
 </head>
 
 <body>
+  <form id="searchForm">
+    <input id='inputQuery' placeholder="Search query..." type="text" >
+    <input id="submitButton" type="submit" value="Search" >
+  </form>
+  <div id="total">Total results:
+    <span id="totalResults">0</span>
+  </div>
   <div id="app"></div>
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
   <script type="text/babel">
-    const request = new XMLHttpRequest();
+  
 
+  
 // request.addEventListener("progress", updateProgress);
 // request.addEventListener("load", transferComplete);
 // request.addEventListener("error", transferFailed);
 // request.addEventListener("abort", transferCanceled);
-const query = 'world of warcraft';
-request.open("GET", `https://api.twitch.tv/kraken/search/streams?q=${query}`);
-request.setRequestHeader('Client-ID', '5bekzo1mw7dssm63lojrxkpi251ggw'); //TODO remove client ID
+const request = new XMLHttpRequest();
 
-const promisedRes = new Promise((resolve)=>{
-  request.onloadend = (pe) => {
-    resolve(JSON.parse(request.response));
-  }
+document.getElementById('searchForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const query = e.target[0].value;
+  request.open("GET", `https://api.twitch.tv/kraken/search/streams?q=${query}`);
+  request.setRequestHeader('Client-ID', '5bekzo1mw7dssm63lojrxkpi251ggw'); //TODO remove client ID
+  request.send();
+
+  const promisedRes = new Promise((resolve)=>{
+    request.onloadend = (pe) => {
+      resolve(JSON.parse(request.response));
+    }
+  })
+
+  getTotals(promisedRes);
+  getRequest(promisedRes);
+
 })
-request.send();
-//resolvedPromise = await resJson;
-//console.log('response is ',  resolvedPromise)
-async function getRequest (){
-  const resJson = await promisedRes;
-  console.log('resJson is', resJson)
-  document.getElementById('app').innerHTML = JSON.stringify(resJson);
+
+
+
+function streamComponent(preview, gameName, viewers, description){
+  return (
+    `<img src=${preview} height="42" width="42">
+    <div className='gameTitle'> ${gameName} </div>
+    <div className='viewerCount'> ${viewers} </div>
+    <div className='description'> ${description}</div>`
+  );
 }
-getRequest();
+
+function buildStreamObjs(streams, html = ''){
+  if (!streams.length){
+    return html;
+  }
+  const curr = streams[0];
+  const {preview, game, viewers, channel} = curr;
+
+  const streamHtml = streamComponent(preview.small, game, viewers, channel.status);
+  const newHtml = `${html} ${streamHtml}`; 
+
+  return buildStreamObjs(streams.slice(1), newHtml)
+}
+async function getTotals (promisedRes){
+  const {_total, streams} = await promisedRes;
+  const streamCount = streams.length ? _total : 0;
+  
+  document.getElementById('totalResults').innerHTML = `${_total}`;
+};
+
+async function getRequest (promisedRes){
+  const {streams, _total} = await promisedRes;
+  const streamHtml = streams.length ? buildStreamObjs(streams) : 'No results, try a different query';
+
+  document.getElementById('app').innerHTML = streamHtml;
+};
     </script>
 </body>
 </html>
