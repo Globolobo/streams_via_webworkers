@@ -1,4 +1,4 @@
-export default function requestObj (query = '') {
+export default function requestObj(query = '') {
     const request = new XMLHttpRequest();
   
       // request.addEventListener("progress", updateProgress);

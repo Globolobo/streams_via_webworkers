@@ -13,9 +13,3 @@ document.getElementById('searchForm').addEventListener('submit', async function(
     
   })
   
-  
-  
-  
-  
-  
-  
