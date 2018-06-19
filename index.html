@@ -7,24 +7,33 @@
   <title>Title</title>
   <meta name="description" content="The Title">
 
-  <link rel="stylesheet" href="css/styles.css?v=1.0">
+  <link rel="stylesheet" href="/styles.css">
 </head>
 
 <body>
-  <form id="searchForm">
-    <input id='inputQuery' placeholder="Search query..." type="text" >
-    <input id="submitButton" type="submit" value="Search" >
-  </form>
-  <div id="total">Total results:
-    <span id="totalResults">0</span>
+  <div id="container">
+    <div id="header">
+      <div id="searchFormContainer">
+        <form id="searchForm">
+            <input id='inputQuery' placeholder="Search query..." type="text" >
+            <input id="submitButton" type="submit" value="Search" >
+          </form>
+      </div>
+    </div>
+
+    <div id="total">Total results:
+      <span id="totalResults">0</span>
+    </div>
+    <div id="streamContainer"></div>
   </div>
-  <div id="streamContainer"></div>
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script data-plugins="transform-es2015-modules-umd" type="text/babel"  src="js/streams/streamContainer/styles.js"></script>
   <script data-plugins="transform-es2015-modules-umd" type="text/babel"  src="js/streams/streamContainer/streamComponent.js"></script>
   <script data-plugins="transform-es2015-modules-umd" type="text/babel"  src="js/streams/streamContainer/recursListFn.js"></script>
   <script data-plugins="transform-es2015-modules-umd" type="text/babel"  src="js/streams/streamContainer/index.js"></script>
   <script data-plugins="transform-es2015-modules-umd" type="text/babel"  src="js/streams/resultsCount.js"></script>
   <script data-plugins="transform-es2015-modules-umd" type="text/babel"  src="js/request/request.js"></script>
   <script data-plugins="transform-es2015-modules-umd" type="text/babel"  src="js/index.js"></script>
+
 </body>
 </html>
