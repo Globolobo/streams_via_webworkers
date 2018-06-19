@@ -1,5 +1,7 @@
 import streamListFn from './recursListFn';
 
 export default function builtStreamObjHtml ({streams}){
-    return streams.length ? streamListFn(streams) : 'No results, try a different query';;
+    //const sendStreamsToWebWorkers
+    
+    return streams.length ? streamListFn(streams.slice(0,5)) : 'No results, try a different query';;
   };
