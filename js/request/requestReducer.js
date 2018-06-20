@@ -8,14 +8,21 @@ export default function requestReducer(streams, total){
       const currPageNum = store.get('currPageNum');
       const query = store.get('currQuery');
       
-      store.set(query, new Map(
-        [
-          [currPageNum, firstSet], 
-          [currPageNum+1, nextSet],
-          ['total', total]
-        ])
-      );
-        return true;
+      if(store.has(query)){
+        const currStreamList = store.get(query);
+        currStreamList.set(currPageNum, firstSet);
+        currStreamList.set(currPageNum+1, nextSet);
+      }
+      else{
+        store.set(query, new Map(
+          [
+            [currPageNum, firstSet], 
+            [currPageNum+1, nextSet],
+            ['total', total]
+          ])
+        );
+      }
+      return true;
     }
     return false;
 }
