@@ -1,7 +1,13 @@
 import streamListFn from './recursListFn';
+import store from '../../store';
 
-export default function builtStreamObjHtml ({streams}){
+export default function builtStreamObjHtml (){
     //const sendStreamsToWebWorkers
-    
-    return streams.length ? streamListFn(streams.slice(0,5)) : 'No results, try a different query';;
+    const currPage = store.get('currPageNum')
+    const currQuery = store.get('currQuery');
+    const currQueryMap = store.get(currQuery);
+    const currStreamArr = currQueryMap.get(currPage);
+
+    document.getElementById('streamContainer').innerHTML = currStreamArr.length ? 
+    streamListFn(currStreamArr) : 'No results, try a different query';;
   };

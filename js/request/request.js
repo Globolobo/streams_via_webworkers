@@ -1,7 +1,11 @@
+import requestReducer from './requestReducer';
+
 export default function requestObj(query = '') {
     const request = new XMLHttpRequest();
   
-      // request.addEventListener("progress", updateProgress);
+    request.addEventListener("progress", ()=>{
+      document.getElementById('streamContainer').innerHTML = 'Loading...'; //TODO change to spinner
+    });
     // request.addEventListener("load", transferComplete);
     // request.addEventListener("error", transferFailed);
     // request.addEventListener("abort", transferCanceled);
@@ -12,7 +16,12 @@ export default function requestObj(query = '') {
     
       return new Promise((resolve)=>{
         request.onloadend = (pe) => {
-          resolve(JSON.parse(request.response));
+          document.getElementById('streamContainer').innerHTML = '';
+          const { streams, _total } = JSON.parse(request.response);
+          console.log('streams', streams);
+          resolve(
+            requestReducer(streams, _total)
+          );
         }
       })
   }
