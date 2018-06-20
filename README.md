@@ -1,1 +1,3 @@
-# streams_via_webworkers
+# Twitch API requests using only vanilla xhr and javacript. 
+
+
