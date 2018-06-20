@@ -16,7 +16,7 @@
       <div id="searchFormContainer">
         <form id="searchForm">
             <input id='inputQuery' placeholder="Search query..." type="text" >
-            <input id="submitButton" type="submit" value="Search" >
+            <button id="submitButton" type="submit">Search</button>
           </form>
       </div>
     </div>
@@ -27,11 +27,14 @@
     <div id="streamContainer"></div>
   </div>
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script data-plugins="transform-es2015-modules-umd" type="text/babel"  src="js/store.js"></script>
+  <script data-plugins="transform-es2015-modules-umd" type="text/babel"  src="js/streams/pagination/styles.js"></script>
+  <script data-plugins="transform-es2015-modules-umd" type="text/babel"  src="js/streams/pagination/index.js"></script>
   <script data-plugins="transform-es2015-modules-umd" type="text/babel"  src="js/streams/streamContainer/styles.js"></script>
   <script data-plugins="transform-es2015-modules-umd" type="text/babel"  src="js/streams/streamContainer/streamComponent.js"></script>
   <script data-plugins="transform-es2015-modules-umd" type="text/babel"  src="js/streams/streamContainer/recursListFn.js"></script>
   <script data-plugins="transform-es2015-modules-umd" type="text/babel"  src="js/streams/streamContainer/index.js"></script>
-  <script data-plugins="transform-es2015-modules-umd" type="text/babel"  src="js/streams/resultsCount.js"></script>
+  <script data-plugins="transform-es2015-modules-umd" type="text/babel"  src="js/request/requestReducer.js"></script>
   <script data-plugins="transform-es2015-modules-umd" type="text/babel"  src="js/request/request.js"></script>
   <script data-plugins="transform-es2015-modules-umd" type="text/babel"  src="js/index.js"></script>
 
