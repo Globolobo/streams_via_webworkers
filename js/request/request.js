@@ -16,9 +16,8 @@ export default function requestObj(query = '') {
     
       return new Promise((resolve)=>{
         request.onloadend = (pe) => {
-          document.getElementById('streamContainer').innerHTML = '';
           const { streams, _total } = JSON.parse(request.response);
-          console.log('streams', streams);
+          
           resolve(
             requestReducer(streams, _total)
           );

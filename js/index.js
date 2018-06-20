@@ -1,6 +1,5 @@
 import requestObj from './request/request';
-import builtStreamObjHtml from './streams/streamContainer/index';
-import pagination from './streams/pagination';
+import pagination from './streams/pagination/index';
 import store from './store';
 
 document.getElementById('searchForm').addEventListener('submit', async function(e){
@@ -15,13 +14,12 @@ document.getElementById('searchForm').addEventListener('submit', async function(
         return alert('Issue with Store');
       }
     }
+    pagination();
 
     const currStreamKey = store.get('currQuery');
     const currQueryMap = store.get(currStreamKey);
     const currQueryTotal = currQueryMap.get('total')
     document.getElementById('totalResults').innerHTML = currQueryTotal;
 
-    builtStreamObjHtml(currQueryMap);
-    //pagination(store.get(currQuery).get('total'));
   });
 
