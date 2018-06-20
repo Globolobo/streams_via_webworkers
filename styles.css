@@ -19,4 +19,10 @@
 }
 #total{
     padding: 5px 0 15px 10px;
+    display: inline-flex;
+}
+#paginationWrapper{
+    display: inline-flex;
+    padding: 10px;
+    float: right;
 }
